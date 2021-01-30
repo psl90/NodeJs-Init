@@ -3,7 +3,7 @@ const express = require('express');
 const app = express()
 app.use(express.json());
 const mongoose = require('mongoose')
-const Product = require('./routes/route')
+const route = require('./routes/route')
 
 /**
  * UPLOAD FOLDER
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use('/api', Product)
+app.use('/api', route)
 
 app.use('/', (req, res) => {
 

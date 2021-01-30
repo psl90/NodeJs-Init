@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 
 /**
- * Import Model
+ * Define your Model under /Models and then import it here
  */
 
 const Model = require('../Models/products')
