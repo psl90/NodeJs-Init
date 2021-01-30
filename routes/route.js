@@ -1,6 +1,11 @@
 const express = require('express')
 const router = express.Router();
-const Product = require('../Models/products')
+
+/**
+ * Import Model
+ */
+
+const Model = require('../Models/products')
 
 /**
  * DEFINE PATH HERE!
@@ -8,13 +13,14 @@ const Product = require('../Models/products')
 
 const path = '/product'
 
+
 /**
  * GET ALL
  */
 
 router.get(path, async (req, res, next) => {
 
-    const a = await Product.find()
+    const a = await Model.find()
     res.json(a)
 })
 
@@ -22,10 +28,10 @@ router.get(path, async (req, res, next) => {
  * GET BY ID
  */
 
-router.get(path + ':id', async (req, res, next) => {
+router.get(path + '/:id', async (req, res, next) => {
 
     const id = req.params.id
-    const a = await Product.findById(id)
+    const a = await Model.findById(id)
     res.json(a)
 })
 
@@ -35,12 +41,26 @@ router.get(path + ':id', async (req, res, next) => {
 
 router.post(path, (req, res, next) => {
 
+    /**
+     * Add the request body
+     *  const STRING = req.body.KEY
+     */
+
     const title = req.body.title;
 
-    const product = new Product({
+    /**
+     * Add the Schema here
+     */
+
+    const model = new Model({
         title: title
     })
-    product.save()
+
+    /**
+     * Save -> Response Json / Catch potential Errors
+     */
+
+    model.save()
         .then(result => {
             console.log(result)
             res.json(result)
@@ -48,21 +68,33 @@ router.post(path, (req, res, next) => {
         .catch(err => {
             console.log(err)
         })
-
 })
 
 /**
- * UPDATE
+ * UPDATE BY ID
  */
 
-router.put(path + ':id', (req, res) => {
+router.put(path + '/:id', (req, res) => {
+
 
     const id = req.params.id
-    const updatedTitle = req.body.updatedTitle
 
-    Product.findById(id).then(product => {
-        product.title = updatedTitle
-        return product.save();
+    /**
+     * Add Update Body
+     */
+    const title = req.body.title
+
+
+    Model.findById(id).then(model => {
+
+        /**
+         * Update Schema
+         */
+
+        model.title = title
+
+
+        return model.save();
     })
         .then(res => {
             console.log(res)
@@ -78,12 +110,12 @@ router.put(path + ':id', (req, res) => {
  * DELETE BY ID
  */
 
-router.delete(path + ':id', (req, res) => {
+router.delete(path + '/:id', (req, res) => {
 
     const id = req.params.id
 
-    Product.findByIdAndRemove(id).then(product => {
-        console.log(product)
+    Model.findByIdAndRemove(id).then(model => {
+        console.log(model)
     })
         .catch(err => {
             console.log(err)
@@ -91,7 +123,5 @@ router.delete(path + ':id', (req, res) => {
     res.status(200,)
 
 })
-
-
 
 module.exports = router
