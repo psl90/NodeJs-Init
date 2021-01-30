@@ -2,11 +2,20 @@ const express = require('express')
 const router = express.Router();
 const Product = require('../Models/products')
 
+
+/**
+ * GET ALL
+ */
+
 router.get('/product', async (req, res, next) => {
 
     const a = await Product.find()
     res.json(a)
 })
+
+/**
+ * GET BY ID
+ */
 
 router.get('/product/:id', async (req, res, next) => {
 
@@ -15,6 +24,9 @@ router.get('/product/:id', async (req, res, next) => {
     res.json(a)
 })
 
+/**
+ * POST
+ */
 
 router.post('/product', (req, res, next) => {
 
@@ -34,6 +46,9 @@ router.post('/product', (req, res, next) => {
 
 })
 
+/**
+ * UPDATE
+ */
 
 router.put('/product/:id', (req, res) => {
 
@@ -53,6 +68,10 @@ router.put('/product/:id', (req, res) => {
     res.status(200,)
 
 })
+
+/**
+ * DELETE BY ID
+ */
 
 router.delete('/product/:id', (req, res) => {
 
