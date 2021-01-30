@@ -26,7 +26,7 @@ app.use('/', (req, res) => {
 });
 
 
-mongoose.connect('mongodb+srv://phillip:mongoconnect@mongo.yj5xy.mongodb.net/Mongo?retryWrites=true&w=majority',  { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGO_URL,  { useNewUrlParser: true, useUnifiedTopology: true})
     .then(result => {
         app.listen(3000)
     })
