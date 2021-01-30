@@ -2,12 +2,17 @@ const express = require('express')
 const router = express.Router();
 const Product = require('../Models/products')
 
+/**
+ * DEFINE PATH HERE!
+ */
+
+const path = '/product'
 
 /**
  * GET ALL
  */
 
-router.get('/product', async (req, res, next) => {
+router.get(path, async (req, res, next) => {
 
     const a = await Product.find()
     res.json(a)
@@ -17,7 +22,7 @@ router.get('/product', async (req, res, next) => {
  * GET BY ID
  */
 
-router.get('/product/:id', async (req, res, next) => {
+router.get(path + ':id', async (req, res, next) => {
 
     const id = req.params.id
     const a = await Product.findById(id)
@@ -28,7 +33,7 @@ router.get('/product/:id', async (req, res, next) => {
  * POST
  */
 
-router.post('/product', (req, res, next) => {
+router.post(path, (req, res, next) => {
 
     const title = req.body.title;
 
@@ -50,7 +55,7 @@ router.post('/product', (req, res, next) => {
  * UPDATE
  */
 
-router.put('/product/:id', (req, res) => {
+router.put(path + ':id', (req, res) => {
 
     const id = req.params.id
     const updatedTitle = req.body.updatedTitle
@@ -73,7 +78,7 @@ router.put('/product/:id', (req, res) => {
  * DELETE BY ID
  */
 
-router.delete('/product/:id', (req, res) => {
+router.delete(path + ':id', (req, res) => {
 
     const id = req.params.id
 
