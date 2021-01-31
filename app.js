@@ -29,6 +29,7 @@ app.use('/', (req, res) => {
 mongoose.connect(process.env.MONGO_URL,  { useNewUrlParser: true, useUnifiedTopology: true})
     .then(result => {
         app.listen(3000)
+        console.log('http://localhost:3000' )
     })
     .catch(err => {
         console.log(err)
